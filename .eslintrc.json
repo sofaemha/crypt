@@ -1,0 +1,25 @@
+{
+  "root": true,
+  "extends": "next/core-web-vitals",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": { "project": ["./tsconfig.json"] },
+  "plugins": ["@typescript-eslint"],
+  "quotes": ["error", "double"],
+  "semi": ["error", "always"],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "eqeqeq": "error",
+    "curly": "error",
+    "@typescript-eslint/strict-boolean-expressions": [
+      2,
+      {
+        "allowString": false,
+        "allowNumber": false
+      }
+    ]
+  },
+  "ignorePatterns": ["src/**/*.test.ts", ".next/**/*", "**/vendor/*.js"]
+}
