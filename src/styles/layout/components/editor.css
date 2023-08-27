@@ -1,0 +1,67 @@
+.codex-editor__redactor {
+  padding-bottom: 2rem !important;
+  margin-right: 3.5rem !important;
+}
+
+.dark .ct::before,
+.dark .ct::after {
+  background-color: var(--color-slate-800);
+}
+
+.dark .ce-popover {
+  --color-border: var(--color-slate-600);
+  --color-background-item-hover: var(--color-slate-700);
+  --color-background: var(--color-slate-800);
+  --color-text-primary: inherit;
+}
+
+.dark .cdx-search-field {
+  background: transparent;
+}
+
+.dark .ce-inline-tool-input {
+  background-color: var(--color-slate-800);
+}
+
+.dark .ce-popover-item__icon {
+  border-color: var(--color-background-item-hover);
+  background: transparent;
+}
+
+.dark .ct__content {
+  color: var(--color-white);
+}
+
+.dark .ce-inline-toolbar {
+  border-color: var(--color-slate-600);
+  background-color: var(--color-slate-800);
+}
+
+.dark .ce-inline-tool:hover {
+  background-color: var(--color-slate-600);
+}
+
+.dark .ce-toolbar__settings-btn,
+.dark .ce-toolbar__plus {
+  border-color: var(--color-slate-600);
+  background-color: var(--color-slate-800);
+}
+
+.dark .ce-toolbar__plus:hover,
+.dark .ce-toolbar__settings-btn:hover {
+  background-color: var(--color-slate-800);
+}
+
+.dark .ce-toolbar__plus svg,
+.dark .ce-toolbar__settings-btn svg {
+  color: var(--color-white);
+}
+
+.dark .ce-block__content > div > span {
+  background-color: var(--color-blue-opacity-55) !important;
+}
+
+.dark .ce-block--selected .ce-block__content {
+  color: var(--color-white);
+  background-color: var(--color-pink-opacity-75);
+}

@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "layout/document/root.css";
+@import "layout/document/scrollbar.css";
+@import "layout/document/selection.css";
+
+@import "layout/components/editor.css";

@@ -1,7 +1,10 @@
-# Table of Contents
+> [!IMPORTANT]\
+> Please download [MPA](https://shd101wyy.github.io/markdown-preview-enhanced/#/) for [VS Code](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced) extensions to bring you a wonderful markdown writing experience
 
 > [!NOTE]\
 > See [changelog](changelog.md) to find all important changes made to this project
+
+# Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Crypt](#crypt)
@@ -16,6 +19,13 @@
   - [Learn More](#learn-more)
   - [Deploy on Vercel](#deploy-on-vercel)
 - [Documentation](#documentation)
+  - [Custom Command](#custom-command)
+    - [Temporary Stop](#temporary-stop)
+    - [Command Helper](#command-helper)
+    - [Git Bash](#git-bash)
+    - [Local Server](#local-server)
+    - [GitHub](#github)
+  - [File Structure](#file-structure)
 
 ---
 
@@ -29,7 +39,7 @@ Anonymous messenger similar to <a class="underline decoration-dotted" href="http
 
 #### Next.js
 
-- [Node.js 16.14]("https://nodejs.org/en") or later.
+- [Node.js 16.14](https://nodejs.org/en) or later.
 - macOS, Windows (including WSL), and Linux are supported.
 
 #### Supabase
@@ -84,7 +94,7 @@ git clone git@github.com:sofaemha/rahasia.git
 gh repo clone sofaemha/rahasia
 ```
 
-> Or directly download the zip file from GitHub : [master.zip]("https://github.com/sofaemha/sofaemha/archive/refs/heads/master.zip")
+> Or directly download the zip file from GitHub : [master.zip](https://github.com/sofaemha/sofaemha/archive/refs/heads/master.zip)
 
 Install all dependencies using NPM :
 
@@ -96,15 +106,18 @@ npm install
 
 #### Automatically
 
+> [!NOTE]\
+> Only for Windows OS or lightweight shell and GNU utilities compiled for Windows (part of MinGW)
+
 I have created a shortcut command to run a development server :
 
 ```bash
-sh run
+sh x -r
 ```
 
 > If you use the command above, your browser will automatically open and display the results, as long as the focus is on the window.
 
-See the [run](run) file for further customization.
+See the [x](x) file for further customization or [Custom Command](#custom-command) as the documentation handle.
 
 #### Manually
 
@@ -122,7 +135,7 @@ pnpm dev
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about Next.js, take a look at the following resources :
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
@@ -138,3 +151,112 @@ Check out their [Next.js deployment documentation](https://nextjs.org/docs/deplo
 ---
 
 # Documentation
+
+## Custom Command
+
+> [!NOTE]\
+> Only for Windows OS or lightweight shell and GNU utilities compiled for Windows (part of MinGW)
+
+I created custom commands to support personal needs. By using the bash programming language, there are several commands that I made as follows :
+
+Usage : `sh x [options] [?github:options]`
+
+Options : `-h` | `-r` | `-b` | `-gh [options]`
+
+`-gh` Options : `-i` | `-u`
+
+### Temporary Stop
+
+If you want to skip the pause, please comment the following line :
+
+```bash
+eval $clear
+echo "OS type lightweight shell and GNU utilities compiled for Windows (part of MinGW)"
+read -p "Press any key to continue... (or CTRL+C to exit)" -n1 -s
+```
+
+### Command Helper
+
+Provides Help information for Windows commands.
+
+Usage : `sh x -h` or `sh x --help`
+
+Code :
+
+```bash
+...
+echo -e "\nShortcut custom command for project development.\n"
+echo -e "Usage: sh x [options] [?github:options]\n"
+echo -e "Options:\n"
+echo -e "   -h, --help \t\t Provides Help information for Windows commands."
+echo -e "   -r, --run \t\t Running localhost in default browser."
+echo -e "   -b, --bash \t\t Running Git Bash in current directory."
+echo -e "   -gh, --github \t GitHub repository commands."
+echo -e "   [gh] | -i, --init \t GitHub repository initialization."
+echo -e "   [gh] | -u, --update \t GitHub updating repository."
+...
+```
+
+### Git Bash
+
+Running Git Bash in current directory.
+
+Usage : `sh x -b` or `sh x --bash`
+
+Code :
+
+```bash
+...
+start "" "C:\Program Files\Git\git-bash.exe"
+...
+```
+
+### Local Server
+
+Running localhost in default browser.
+
+Usage : `sh x -r` or `sh x --run`
+
+Code :
+
+```bash
+...
+explorer "http://localhost:3000/"
+npm run dev
+...
+```
+
+### GitHub
+
+GitHub repository commands for initialization and updating repository.
+
+Usage : `sh x -gh [options]` or `sh x --github [options]`
+
+Options : `-i` , `--init` or `-u` , `--update`
+
+Code :
+
+```bash
+# sh x -gh -i
+...
+read repo
+read branch
+git init
+git branch -M "$branch"
+git remote add origin "$repo"
+...
+```
+
+```bash
+# sh x -gh -u
+...
+read message
+read branch
+git add *
+git commit -m "$message"
+git branch -M "$branch"
+git push -u origin "$branch"
+...
+```
+
+## File Structure
