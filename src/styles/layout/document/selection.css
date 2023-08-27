@@ -1,0 +1,19 @@
+::-moz-selection {
+  color: var(--color-black);
+  background-color: var(--color-blue-opacity-55);
+}
+
+::selection {
+  color: var(--color-black);
+  background-color: var(--color-blue-opacity-55);
+}
+
+.dark ::-moz-selection {
+  color: var(--color-white);
+  background-color: var(--color-pink-opacity-75);
+}
+
+.dark ::selection {
+  color: var(--color-white);
+  background-color: var(--color-pink-opacity-75);
+}

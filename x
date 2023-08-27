@@ -13,8 +13,26 @@ elif [[ "$OSTYPE" == "msys" ]]; then
     clear="clear"
   fi
   while [ True ]; do
-    if [ "$1" = "--run" -o "$1" = "-r" ]; then
-      # clear
+    if [ "$1" = "--help" -o "$1" = "-h" ]; then
+      eval $clear
+      echo -e "\nShortcut custom command for project development.\n"
+      echo -e "Usage: sh x [options] [?github:options]\n"
+      echo -e "Options:\n"
+      echo -e "   -h, --help \t\t Provides Help information for Windows commands."
+      echo -e "   -r, --run \t\t Running localhost in default browser."
+      echo -e "   -b, --bash \t\t Running Git Bash in current directory."
+      echo -e "   -gh, --github \t GitHub repository commands."
+      echo -e "   [gh] | -i, --init \t GitHub repository initialization."
+      echo -e "   [gh] | -u, --update \t GitHub updating repository."
+      break
+    elif [ "$1" = "--bash" -o "$1" = "-b" ]; then
+      # eval $clear
+      # echo "OS type lightweight shell and GNU utilities compiled for Windows (part of MinGW)"
+      # read -p "Press any key to continue... (or CTRL+C to exit)" -n1 -s
+      start "" "C:\Program Files\Git\git-bash.exe"
+      break
+    elif [ "$1" = "--run" -o "$1" = "-r" ]; then
+      # eval $clear
       # echo "OS type lightweight shell and GNU utilities compiled for Windows (part of MinGW)"
       # read -p "Press any key to continue... (or CTRL+C to exit)" -n1 -s
       eval $clear
@@ -22,8 +40,9 @@ elif [[ "$OSTYPE" == "msys" ]]; then
       explorer "http://localhost:3000/"
       echo -e "\033[0;32mRunning NPM scripts...\033[0m"
       npm run dev
+      break
     elif [ "$1" = "--github" -o "$1" = "-gh" ]; then
-      # clear
+      # eval $clear
       # echo "OS type lightweight shell and GNU utilities compiled for Windows (part of MinGW)"
       # read -p "Press any key to continue... (or CTRL+C to exit)" -n1 -s
       eval $clear
@@ -39,6 +58,7 @@ elif [[ "$OSTYPE" == "msys" ]]; then
           read branch
           if [ -z "$branch" ]; then
             echo "error: GitHub branch name cannot be empty"
+            break
           else
             git init
             git branch -M "$branch"
@@ -58,6 +78,7 @@ elif [[ "$OSTYPE" == "msys" ]]; then
           read branch
           if [ -z "$branch" ]; then
             echo "error: GitHub branch name cannot be empty"
+            break
           else
             echo -e "\033[0;32mAdding all file into commit...\033[0m"
             git add *
@@ -70,15 +91,10 @@ elif [[ "$OSTYPE" == "msys" ]]; then
         fi
       else
         echo "error: argument not found"
+        break
       fi
     else
-      eval $clear
-      echo -e "\nShortcut custom command for project development.\n"
-      echo -e "sh x [command:][child]\n"
-      echo -e "\t [] \t\t Provides Help information for Windows commands."
-      echo -e "\t [-r] \t\t Running localhost in default browser."
-      echo -e "\t [-gh] [-i] \t GitHub repository initialization."
-      echo -e "\t [-gh] [-u] \t GitHub updating repository."
+      echo "error: argument not found"
       break
     fi
   done
