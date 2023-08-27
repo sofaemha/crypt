@@ -47,7 +47,12 @@ elif [[ "$OSTYPE" == "msys" ]]; then
       # read -p "Press any key to continue... (or CTRL+C to exit)" -n1 -s
       eval $clear
       echo -e "\033[0;32mRunning github command line...\033[0m"
-      if [ "$2" = "--init" -o "$2" = "-i" ]; then
+      if [ "$2" = "--reset" -o "$2" = "-r" ]; then
+        eval $clear
+        echo "Are you sure want to set HEAD into latest default branch?"
+        read -p "Press any key to continue... (or CTRL+C to exit)" -n1 -s
+        git reset --hard origin/master
+      elif [ "$2" = "--init" -o "$2" = "-i" ]; then
         echo -e "\033[0;32mGitHub initialization...\033[0m"
         echo "GitHub repository HTTPS/SSH :"
         read repo
