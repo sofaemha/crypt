@@ -2,23 +2,23 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import Icon from "@/components/container/icon";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-
 const formSchema = z.object({
-  username: z
-    .string()
-    .min(5, {
-      message: "Account name must be at least 5 characters.",
-    })
-    .startsWith("Administrator-", { message: "Guests are not allowed to enter." }),
+  username: z.string().min(5, { message: "Account name must be at least 5 characters." }).max(25, { message: "Account name must be 25 or fewer characters long." }),
+  password: z.string().min(10, { message: "Password must be at least 10 characters." }).max(50, { message: "Password must be 50 or fewer characters long." }),
 });
 
 export default function LoginForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+      password: "",
+    },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -39,15 +39,33 @@ export default function LoginForm() {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Unique Account</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input type="text" {...field} />
                   </FormControl>
+                  <FormDescription>Personal accounts that are managed directly without a third party.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Encrypted Password</FormLabel>
+                  <FormControl>
+                    <Input type="password" {...field} />
+                  </FormControl>
+                  <FormDescription>Passwords that have been modified by third parties.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" className="rounded-xl sm:rounded-md h-auto px-5 py-3 mb-2 mt-4 ml-auto mr-4 sm:mx-0 sm:w-full flex items-center justify-center font-medium dark:bg-slate-950 dark:hover:bg-slate-950/75 dark:text-white">
+              Submit
+              <Icon iconName="GoPaperAirplane" iconFolder="go" iconProps={{ className: "w-4 h-4 ml-2" }} />
+            </Button>
           </form>
         </Form>
       </CardContent>

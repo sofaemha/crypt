@@ -48,7 +48,6 @@
     "iron-session": "^6.3.1",
     "moment": "^2.29.4",
     "next": "13.4.19",
-    "next-auth": "^4.23.1",
     "next-nprogress-bar": "^2.1.2",
     "next-themes": "^0.2.1",
     "postcss": "8.4.28",
