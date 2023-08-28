@@ -7,8 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { RouteHandlerWithSession, ironSessionWrapper } from "@/app/api/login";
-import { NextResponse } from "next/server";
+
 const formSchema = z.object({
   username: z.string().min(5, { message: "Account name must be at least 5 characters." }).max(25, { message: "Account name must be 25 or fewer characters long." }),
   password: z.string().min(10, { message: "Password must be at least 10 characters." }).max(50, { message: "Password must be 50 or fewer characters long." }),
@@ -23,11 +22,24 @@ export default function LoginForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    const POST: RouteHandlerWithSession = ironSessionWrapper(async (request) => {
-      request.session.destroy();
-      return NextResponse.json({});
-    });
+  function onSubmit(input: z.infer<typeof formSchema>) {
+    const submit = async (data: { username: string; password: string }) => {
+      await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((data) => {
+          return data;
+        })
+        .catch((error) => {
+          return error;
+        });
+    };
+
+    console.log(submit(input));
   }
 
   return (

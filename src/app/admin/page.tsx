@@ -1,4 +1,3 @@
-import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 import { unsealData } from "iron-session/edge";
 import { cookies } from "next/headers";
 import Footer from "@/components/content/footer";
