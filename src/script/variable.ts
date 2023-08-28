@@ -8,5 +8,10 @@ export const tips: string[] = [
   "Consider trying dark mode for a new eye-pleasing sensation at night.",
   "Don't forget to always include my name in your cloned projects and consider tagging my github account as well.",
   "Feel free to create new issues or discussions or even pull requests for better improvements.",
-  "Always consider using a Virtual Private Network (VPN) to mask your identity and make it more complex and difficult to track."
-]
+  "Always consider using a Virtual Private Network (VPN) to mask your identity and make it more complex and difficult to track.",
+];
+
+export const sessionOptions: { cookieName: string; password: string } = {
+  cookieName: process.env.NEXT_PUBLIC_ADMINISTRATOR_SESSION_COOKIE as string,
+  password: process.env.NEXT_PUBLIC_ADMINISTRATOR_PASSWORD as string,
+};
