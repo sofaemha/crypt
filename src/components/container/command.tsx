@@ -10,9 +10,9 @@ export function Command({ showCommand, setCommand, toggleCommand }: { showComman
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    if (theme === "dark") {
+    if (theme === "dark" && !darkMode) {
       setTheme("light");
-    } else {
+    } else if (theme === "light" && darkMode) {
       setTheme("dark");
     }
   }, [darkMode]);
