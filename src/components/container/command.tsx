@@ -1,13 +1,16 @@
 "use client";
-
 import { useEffect, ReactNode, Dispatch, SetStateAction, useState } from "react";
+import { useRouter } from "next/navigation";
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from "@/components/ui/command";
 import { useTheme } from "next-themes";
+import { useToast } from "@/components/ui/use-toast";
 import Icon from "@/components/container/icon";
 
-export function Command({ showCommand, setCommand, toggleCommand }: { showCommand: boolean; setCommand: Dispatch<SetStateAction<boolean>>; toggleCommand: () => void }) {
+export function Command({ showCommand, setCommand, toggleCommand, session }: { showCommand: boolean; setCommand: Dispatch<SetStateAction<boolean>>; toggleCommand: () => void; session: Record<string, unknown> | null }) {
   const [darkMode, setDarkMode] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { toast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     if (theme === "dark" && !darkMode) {
@@ -41,6 +44,20 @@ export function Command({ showCommand, setCommand, toggleCommand }: { showComman
     return () => document.removeEventListener("keydown", down);
   }, []);
 
+  async function destroySession() {
+    const data = await fetch("/api/auth/out/", { method: "POST" });
+    const result = JSON.parse(await data.text());
+
+    if (result?.error) {
+      toast({
+        variant: "danger",
+        title: result.text,
+      });
+    } else {
+      router.push("/");
+    }
+  }
+
   function Item({ children, shortcut, onSelect = () => {} }: { children: ReactNode; shortcut?: string; onSelect?: (value: string) => void }) {
     const text = shortcut === undefined ? "" : shortcut;
     return (
@@ -60,6 +77,7 @@ export function Command({ showCommand, setCommand, toggleCommand }: { showComman
       </CommandItem>
     );
   }
+
   return (
     <>
       <CommandDialog open={showCommand} onOpenChange={setCommand}>
@@ -67,14 +85,24 @@ export function Command({ showCommand, setCommand, toggleCommand }: { showComman
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Account">
-            <Item
-              shortcut="⌘ ⇧ G"
-              onSelect={() => {
-                window.open("/admin/", "_self");
-              }}>
-              <Icon iconName="LuUser" iconFolder="lu" iconProps={{ className: "h-4 w-4" }} />
-              <span className="ml-2">Admin</span>
-            </Item>
+            {session ? (
+              <Item
+                onSelect={() => {
+                  destroySession();
+                }}>
+                <Icon iconName="LuLogOut" iconFolder="lu" iconProps={{ className: "h-4 w-4" }} />
+                <span className="ml-2">Sign Out</span>
+              </Item>
+            ) : (
+              <Item
+                shortcut="⌘ ⇧ G"
+                onSelect={() => {
+                  window.open("/admin/", "_self");
+                }}>
+                <Icon iconName="LuLogIn" iconFolder="lu" iconProps={{ className: "h-4 w-4" }} />
+                <span className="ml-2">Sign In</span>
+              </Item>
+            )}
             <Item
               shortcut="⌘ ⇧ V"
               onSelect={() => {

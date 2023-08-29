@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Command } from "@/components/container/command";
 
-export default function Footer() {
+export default function Footer({ session }: { session: Record<string, unknown> | null }) {
   const [isOpen, setIsOpen] = useState(false);
   const tahun = new Date().getFullYear();
 
@@ -43,7 +43,7 @@ export default function Footer() {
           </ul>
         </div>
       </footer>
-      <Command showCommand={isOpen} setCommand={setIsOpen} toggleCommand={toggleIsOpen} />
+      <Command showCommand={isOpen} setCommand={setIsOpen} toggleCommand={toggleIsOpen} session={session} />
     </>
   );
 }
