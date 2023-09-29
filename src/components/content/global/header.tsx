@@ -1,9 +1,10 @@
+import { env } from "process";
 import { ReactNode } from "react";
 import randomItem from "random-item";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import Icon from "@/components/container/icon";
 import { tips } from "@/script/variable";
+import Icon from "@/components/container/library/icon";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 type HeaderContentType = {
   children: ReactNode;
@@ -24,17 +25,17 @@ const Paragraph: React.FC<HeaderContentType> = ({ children, condition, className
 };
 
 export default function Header() {
-  const description: string | undefined = process.env.NEXT_PUBLIC_APPLICATION_DESCRIPTION;
+  const description: string | undefined = env.NEXT_PUBLIC_APP_D;
   return (
     <Card className="rounded-t-none rounded-b-3xl sm:rounded-lg bg-white dark:bg-slate-900">
       <CardHeader>
         <CardTitle>
           <a className="inline-flex" href="/">
             <Icon iconName="HiFingerPrint" iconFolder="hi" iconProps={{ className: "my-auto" }} />
-            <code className="text-3xl leading-none ml-1.5">{process.env.NEXT_PUBLIC_APPLICATION_NAME}</code>
+            <code className="text-3xl leading-none ml-1.5">{env.NEXT_PUBLIC_APP_N}</code>
           </a>
         </CardTitle>
-        <CardDescription>Anonymous social media without knowing identity of the sender</CardDescription>
+        <CardDescription>{env.NEXT_PUBLIC_META_D}</CardDescription>
       </CardHeader>
       <CardContent>
         <Paragraph className="text-base" condition={description !== undefined && /<\/?[a-z][\s\S]*>/i.test(description)}>

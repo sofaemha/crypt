@@ -1,15 +1,16 @@
 import "@/styles/globals.css";
+import { env } from "process";
 import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
-import ThemeProvider from "@/components/container/theme";
+import ThemeProvider from "@/components/container/library/theme";
 
 export const metadata: Metadata = {
-  title: process.env.NEXT_PUBLIC_TITLE,
-  description: process.env.NEXT_PUBLIC_DESCRIPTION || "",
-  keywords: process.env.NEXT_PUBLIC_KEYWORD || "",
-  applicationName: process.env.NEXT_PUBLIC_APPLICATION_NAME,
-  viewport: process.env.NEXT_PUBLIC_VIEWPORT || "",
-  authors: [{ name: process.env.NEXT_PUBLIC_ADMINISTRATOR_NAME, url: process.env.NEXT_PUBLIC_ADMINISTRATOR_WEBSITE || "" }],
+  title: env.NEXT_PUBLIC_META_T,
+  description: env.NEXT_PUBLIC_META_D || "",
+  keywords: env.NEXT_PUBLIC_META_K || "",
+  applicationName: env.NEXT_PUBLIC_APP_N,
+  viewport: env.NEXT_PUBLIC_META_V || "",
+  authors: [{ name: env.NEXT_PUBLIC_ADMIN_N, url: env.NEXT_PUBLIC_ADMIN_W || "" }],
   formatDetection: { telephone: false, date: false, email: false, address: false },
 };
 
