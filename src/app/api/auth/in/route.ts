@@ -1,3 +1,4 @@
+import { env } from "process";
 import { NextResponse } from "next/server";
 import { ironSessionWrapper } from "@/script/utility/session";
 
@@ -12,8 +13,8 @@ declare module "iron-session" {
 
 export async function POST(request: Request) {
   const { username, password }: { username: string; password: string } = await request.json();
-  const isUsername: boolean = username === process.env.NEXT_PUBLIC_ADMINISTRATOR_USERNAME;
-  const isPassword: boolean = password === process.env.NEXT_PUBLIC_ADMINISTRATOR_PASSWORD;
+  const isUsername: boolean = username === env.NEXT_PUBLIC_ADMIN_U;
+  const isPassword: boolean = password === env.NEXT_PUBLIC_ADMIN_P;
 
   const session = ironSessionWrapper(async (request) => {
     if (isUsername && isPassword) {

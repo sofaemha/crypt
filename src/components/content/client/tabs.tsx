@@ -1,7 +1,7 @@
 "use client";
+import Loading from "@/components/container/skeleton/message";
+import Create from "@/components/content/client/create";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Loading from "@/components/container/loading";
-import Create from "@/components/content/create";
 
 export default function Tab({ variant = "app" }: { variant?: string }) {
   const isReply: boolean = variant === "reply" ? true : false;

@@ -1,15 +1,16 @@
 "use client";
+import { env } from "process";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
-import Icon from "@/components/container/icon";
+import Icon from "@/components/container/library/icon";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const formSchema = z.object({
   username: z.string().min(5, { message: "Account name must be at least 5 characters." }).max(25, { message: "Account name must be 25 or fewer characters long." }),
@@ -24,8 +25,8 @@ export default function LoginForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: process.env.NEXT_PUBLIC_ADMINISTRATOR_USERNAME as string,
-      password: process.env.NEXT_PUBLIC_ADMINISTRATOR_PASSWORD as string,
+      username: env.NEXT_PUBLIC_ADMIN_U as string,
+      password: env.NEXT_PUBLIC_ADMIN_U as string,
     },
   });
 

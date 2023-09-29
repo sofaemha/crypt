@@ -1,7 +1,7 @@
-import Footer from "@/components/content/footer";
-import Header from "@/components/content/header";
-import Tab from "@/components/content/tabs";
 import { getSession } from "@/script/utility/session";
+import Footer from "@/components/content/global/footer";
+import Header from "@/components/content/global/header";
+import Tab from "@/components/content/client/tabs";
 
 export default async function Home() {
   const session = await getSession();

@@ -10,8 +10,3 @@ export const tips: string[] = [
   "Feel free to create new issues or discussions or even pull requests for better improvements.",
   "Always consider using a Virtual Private Network (VPN) to mask your identity and make it more complex and difficult to track.",
 ];
-
-export const sessionOptions: { cookieName: string; password: string } = {
-  cookieName: process.env.NEXT_PUBLIC_ADMINISTRATOR_SESSION_COOKIE as string,
-  password: process.env.NEXT_PUBLIC_ADMINISTRATOR_PASSWORD as string,
-};
