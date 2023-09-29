@@ -27,7 +27,7 @@ const Paragraph: React.FC<HeaderContentType> = ({ children, condition, className
 export default function Header() {
   const description: string | undefined = env.NEXT_PUBLIC_APP_D;
   return (
-    <Card className="rounded-t-none rounded-b-3xl sm:rounded-lg bg-white dark:bg-slate-900">
+    <Card className="rounded-t-none rounded-b-3xl sm:rounded-lg bg-white dark:bg-slate-900 transition-colors">
       <CardHeader>
         <CardTitle>
           <a className="inline-flex" href="/">

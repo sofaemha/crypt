@@ -5,5 +5,6 @@
 @import "layout/document/root.css";
 @import "layout/document/scrollbar.css";
 @import "layout/document/selection.css";
+@import "layout/document/kbd.css";
 
 @import "layout/components/editor.css";

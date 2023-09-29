@@ -8,7 +8,7 @@ export default function Loading({ count = 1 }: { count?: number }) {
       {Array(count)
         .fill(0)
         .map((_, index) => (
-          <Card key={index} className="py-4 ps-6 pe-2 mx-4 sm:mx-0 rounded-3xl sm:rounded-lg bg-white dark:bg-slate-900">
+          <Card key={index} className="py-4 ps-6 pe-2 mx-4 sm:mx-0 rounded-3xl sm:rounded-lg bg-white dark:bg-slate-900 transition-colors">
             <CardHeader className="flex flex-row items-center space-x-4">
               <Skeleton className="h-12 w-12 rounded-full" />
               <div className="space-y-2">

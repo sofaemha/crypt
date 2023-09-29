@@ -17,7 +17,7 @@ export default function Footer({ session }: { session: Record<string, unknown> |
 
   return (
     <>
-      <footer className="sm:rounded-lg rounded-t-3xl shadow border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+      <footer className="sm:rounded-lg rounded-t-3xl shadow border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors">
         <div className="w-full max-w-screen-xl mx-auto p-8 sm:p-4 text-start flex items-center justify-between">
           <span className="text-sm ml-4 text-start text-gray-500 dark:text-gray-400">
             <a href="https://sofa.my.id/" className="hover:underline hover:decoration-dotted">

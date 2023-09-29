@@ -26,7 +26,7 @@ export default function LoginForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: env.NEXT_PUBLIC_ADMIN_U as string,
-      password: env.NEXT_PUBLIC_ADMIN_U as string,
+      password: env.NEXT_PUBLIC_ADMIN_P as string,
     },
   });
 

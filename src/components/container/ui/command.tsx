@@ -1,15 +1,17 @@
 "use client";
 import { useEffect, ReactNode, Dispatch, SetStateAction, useState } from "react";
 import { useTheme } from "next-themes";
+import { getCookies  } from 'cookies-next';
 import Icon from "@/components/container/library/icon";
 import Alert from "@/components/container/ui/wary";
 import { Theme } from "@/components/container/library/theme";
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from "@/components/ui/command";
 
 export function Command({ showCommand, setCommand, toggleCommand, session }: { showCommand: boolean; setCommand: Dispatch<SetStateAction<boolean>>; toggleCommand: () => void; session: Record<string, unknown> | null }) {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [alert, setAlert] = useState(false);
   const { theme, setTheme } = useTheme();
+  console.log(getCookies());
   const shortcut = (e: KeyboardEvent) => {
     if ((e.key === "k" || e.key === "K") && (e.metaKey || e.ctrlKey) && !e.shiftKey) {
       e.preventDefault();
@@ -19,11 +21,11 @@ export function Command({ showCommand, setCommand, toggleCommand, session }: { s
       e.preventDefault();
       setDarkMode((darkMode) => !darkMode);
     }
-    if (e.key === "X" && (e.metaKey || e.ctrlKey) && e.shiftKey) {
+    if (e.key === "V" && (e.metaKey || e.ctrlKey) && e.shiftKey) {
       e.preventDefault();
       window.open("/admin/", "_self");
     }
-    if (e.key === "V" && (e.metaKey || e.ctrlKey) && e.shiftKey) {
+    if (e.key === "B" && (e.metaKey || e.ctrlKey) && e.shiftKey) {
       e.preventDefault();
       window.open("https://supabase.com/dashboard/", "_blank");
     }
@@ -44,7 +46,7 @@ export function Command({ showCommand, setCommand, toggleCommand, session }: { s
           {text.length > 1
             ? text.split(" ").map((key) => {
                 return (
-                  <kbd key={key} className="w-5 h-5 min-w-[20px] rounded inline-flex items-center justify-center uppercase bg-slate-200 dark:bg-slate-600 dark:text-white">
+                  <kbd key={key} className="w-5 h-5 min-w-[20px] m-0 rounded flex items-center justify-center uppercase bg-gradient-to-tl bg-white from-slate-200 dark:from-[#565872] dark:to-[#31355b]">
                     {key}
                   </kbd>
                 );
@@ -63,7 +65,7 @@ export function Command({ showCommand, setCommand, toggleCommand, session }: { s
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Account">
             <Item
-              shortcut="⌘ ⇧ X"
+              shortcut="⌘ ⇧ V"
               onSelect={() => {
                 window.open("/admin/", "_self");
               }}>
@@ -71,7 +73,7 @@ export function Command({ showCommand, setCommand, toggleCommand, session }: { s
               <span className="ml-2">Sign {session ? "Out" : "In"}</span>
             </Item>
             <Item
-              shortcut="⌘ ⇧ V"
+              shortcut="⌘ ⇧ B"
               onSelect={() => {
                 window.open("https://supabase.com/dashboard/", "_blank");
               }}>
